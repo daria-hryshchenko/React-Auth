@@ -4,20 +4,24 @@ import { refreshUser } from 'redux/user/operations';
 import { Navbar } from 'components/Navbar/Navbar';
 import { RestrictedRoute } from 'components/RestrictedRoute';
 import { PrivateRoute } from 'components/PrivateRoute';
-import { Register } from 'components/Register/Register';
-import { Login } from 'components/Login/Login';
-import { Contacts } from 'components/Contacts/Contacts';
-import { Home } from 'components/Home/Home';
+import { Register } from 'pages/Register/Register';
+import { Login } from 'pages/Login/Login';
+import { Contacts } from 'pages/Contacts/Contacts';
+import { Home } from 'pages/Home/Home';
 import { Routes, Route } from 'react-router-dom';
+import { useAuth } from './../hooks/useAuth';
 
 export default function App() {
   const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <Routes>
       <Route path="/" element={<Navbar />}>
         <Route index element={<Home />} />
