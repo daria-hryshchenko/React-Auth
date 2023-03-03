@@ -2,28 +2,20 @@ import styled from 'styled-components';
 
 export const Form = styled.form`
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 50px 90px;
-  border: 1px solid #725cff;
-  border-radius: 10px;
+  align-items: baseline;
+  gap: 12px;
 `;
-export const Label = styled.label`
-  font-size: 20px;
-  color: #725cff;
-  font-weight: bold;
-`;
+
 export const Input = styled.input`
   color: #000;
-  border: 1px solid #725cff;
+  border: 1px solid #000;
   border-radius: 5px;
   margin-bottom: 20px;
 `;
+
 export const Button = styled.button`
-  margin-top: 20px;
-  padding: 15px;
+  padding: 5px 15px;
   border: none;
   background-color: #725cff;
   border-radius: 10px;

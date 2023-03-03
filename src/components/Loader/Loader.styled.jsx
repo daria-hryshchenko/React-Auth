@@ -29,7 +29,7 @@ export const Item = styled.div`
   margin: 0 auto;
   left: 8px;
   width: 16px;
-  background: #303f9f;
+  background: #725cff;
   animation: ${loader} 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   &:nth-child(1) {
     left: 8px;

@@ -1,51 +1,45 @@
 import { useEffect } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
-import { addFilter } from 'redux/filterSlice';
-import { fetchContacts } from 'redux/operations';
-import { getIsloading } from 'redux/selectors';
-import Loader from 'components/Loader/Loader';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/user/operations';
+import { Navbar } from 'components/Navbar/Navbar';
+import { RestrictedRoute } from 'components/RestrictedRoute';
+import { PrivateRoute } from 'components/PrivateRoute';
+import { Register } from 'components/Register/Register';
+import { Login } from 'components/Login/Login';
+import { Contacts } from 'components/Contacts/Contacts';
+import { Home } from 'components/Home/Home';
+import { Routes, Route } from 'react-router-dom';
+
 export default function App() {
   const dispatch = useDispatch();
-  const isloading = useSelector(getIsloading);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (
-    <Container>
-      {isloading && <Loader />}
-      <Title>Phonebook</Title>
-      <ContactForm />
-      <SubTitle>Contacts</SubTitle>
-      <Filter
-        onFilterChange={event => dispatch(addFilter(event.target.value))}
-      />
-      <ContactList />
-    </Container>
+    <Routes>
+      <Route path="/" element={<Navbar />}>
+        <Route index element={<Home />} />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Register />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<Contacts />} />
+          }
+        ></Route>
+      </Route>
+    </Routes>
   );
 }
-
-const Container = styled.section`
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-`;
-
-const Title = styled.h1`
-  font-size: 30px;
-  color: #1d81af;
-`;
-
-const SubTitle = styled.h2`
-  font-size: 25px;
-  color: #1d81af;
-`;
