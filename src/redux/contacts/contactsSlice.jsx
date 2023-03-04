@@ -37,7 +37,7 @@ export const contactsSlice = createSlice({
           addContact.pending
         ),
         state => {
-          state.isLoading = true;
+          state.isLoading = false;
         }
       )
       .addMatcher(
