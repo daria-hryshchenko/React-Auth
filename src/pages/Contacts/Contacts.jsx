@@ -4,7 +4,7 @@ import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import { addFilter } from 'redux/filterSlice';
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
 import { getIsloading } from 'redux/selectors';
 import Loader from 'components/Loader/Loader';
 import { Container, Title, SubTitle } from './Contacts.styled';
